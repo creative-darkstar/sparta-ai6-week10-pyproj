@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third party
     "django_extensions",
     "django_seed",
     "rest_framework",
+    'rest_framework_simplejwt.token_blacklist',
 
+    # my apps
     "accounts",
     "products",
 ]
@@ -88,7 +91,7 @@ DATABASES = {
 }
 
 # Auth User Model - Custom
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.UserInfo'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -119,8 +122,10 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
 
 # Internationalization
