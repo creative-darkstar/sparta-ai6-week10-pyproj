@@ -61,6 +61,6 @@ class UserProfileAPIView(APIView):
 
     def get(self, request, username):
         username = username.lower()
-        user = get_object_or_404(UserInfo, username=username)
+        user = get_object_or_404(UserInfo, username=username, is_active=True)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
