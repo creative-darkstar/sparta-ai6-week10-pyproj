@@ -26,7 +26,8 @@ class ProductListAPIView(APIView):
         serializer = ProductListSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(
-                user=request.user
+                user=request.user,
+                is_visible=True
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
