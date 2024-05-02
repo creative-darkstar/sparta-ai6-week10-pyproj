@@ -21,8 +21,11 @@ class UserSerializer(serializers.ModelSerializer):
         ret.pop("user_permissions")
         return ret
 
-    # def save(self):
-    #     email = self.validated_data['email'].lower()
-    #     username = self.validated_data['username'].lower()
-    #     first_name = self.validated_data['first_name'].lower()
-    #     last_name = self.validated_data['last_name'].lower()
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            # provide django, password will be hashing!
+            instance.set_password(password)
+        instance.save()
+        return instance
