@@ -4,6 +4,8 @@
 # Custom
 .idea
 **/migrations/*
+**/media/images/*
+!**/media/images/.gitkeep
 
 
 ### macOS ###

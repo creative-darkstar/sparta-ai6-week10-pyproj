@@ -4,5 +4,6 @@ from . import views
 app_name = "products"
 
 urlpatterns = [
-
+    path("", views.ProductListAPIView.as_view(), name="product_list"),
+    path("<int:productId>", views.ProductDetailAPIView.as_view(), name="product_detail"),
 ]
