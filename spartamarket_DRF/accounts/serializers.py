@@ -32,5 +32,9 @@ class UserSerializer(serializers.ModelSerializer):
             # AbstractBaseUser 의 method를 사용해 암호화
             # UserInfo는 AbstractBaseUser 의 method를 사용할 수 있음
             instance.set_password(password)
+
+        instance.first_name = validated_data.get("first_name").lower()
+        instance.last_name = validated_data.get("last_name").lower()
+
         instance.save()
         return instance
