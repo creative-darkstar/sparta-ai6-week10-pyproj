@@ -1,7 +1,7 @@
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -15,7 +15,7 @@ from .serializers import (
 class ProductListAPIView(APIView):
     # APIView permission_classes override
     # Check user's auth. If it is valid, proceed class funcs.
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # 페이지네이션 상수
     # 한 페이지에 몇 개의 상품을 표시할지 결정
@@ -56,7 +56,7 @@ class ProductListAPIView(APIView):
 class ProductDetailAPIView(APIView):
     # APIView permission_classes override
     # Check user's auth. If it is valid, proceed class funcs.
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, productId):
         row = get_object_or_404(ProductInfo, pk=productId, is_visible=True)
